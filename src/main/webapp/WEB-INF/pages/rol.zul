@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native"> 
+    
+       
+<!--ZONA DEL MENU PRINCIPAL--> 
+   <include id="Menubase" src="menubase.zul" />
+<!--///////////////////////////////////////////////////////-->
+<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jwt.controller.RolController')" title="Administrar Roles" width="700px"  border="normal" position="center" mode="overlapped">
+<!--ZONA DEL FORMULARIO AGREGAR/EDITAR
+    <div align="center">
+    <label>Agregar/Editar</label> 
+<h:form id="form" action="saveRol" method="POST" modelAttribute="rol">
+    <h:table> 
+        <h:input type="hidden" value="${rol.id_rol}" id="id_rol" name="id_rol"/>
+      <h:tr> 
+       <h:tb> Nombre </h:tb> 
+       <h:tb> 
+        <h:input value="${rol.nombre}" id="nombre" name="nombre"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr> 
+       <h:tb> 
+        <h:input type="submit" value="Guardar" align="center"></h:input> 
+       </h:tb> 
+      </h:tr> 
+    </h:table> 
+  </h:form>
+</div>-->
+<div>
+    <button id="orderBtn" label="Agregar" autodisable="self">
+        <attribute name="onClick">
+            <![CDATA[
+                modalwindow.setVisible(true);
+            ]]>
+        </attribute>
+    </button>
+</div>
+    
+<!--///////////////////////////////////////////////////////-->
+<!--ZONA DE LA GRID QUE MUESTRA LOS ROLES EN BASE DE DATOS-->      
+    <div> 
+        <listbox id="listRol" model="${listRol}">
+                    <listhead>
+                        <listheader label="Nombre"/>
+                        <listheader label="Estatus"/>
+                        <listheader label="Accion"/>
+                    </listhead>
+                    <template name="model">
+                    <listitem>
+                            <listcell>
+                                <label value="${each.nombre}"/>
+                            </listcell>
+                            <listcell>
+                                <label if="${each.estatus==1}" value="Activo"/>
+                                <label if="${each.estatus==0}" value="Inactivo"/>
+                            </listcell>
+                            <listcell>
+                                <a href="/editRol?id=${each.id}">Editar</a>
+                                <a/>
+                                <a href="/deleteRol?id=${each.id}">Eliminar</a>
+                                <a/>
+                                <a href="/changeStatusRol?id=${each.id}">Activar/Desactivar</a>
+                            </listcell>
+                    </listitem>
+                    </template>
+                    
+        </listbox>
+    </div>
+<!--///////////////////////////////////////////////////////-->  
+  </window>
+  
+  <window id="modalwindow" title="Agregar/Editar" border="normal" width="460px"
+    apply="org.zkoss.bind.BindComposer" position="center" closable="modalwindow.setVisible(false)"
+    action="show: slideDown;hide: slideUp"
+    visible="false">
+      
+    <grid> 
+          
+        <rows>	
+            <row>
+                Nombre: 
+                <textbox id="nombre" maxlength="30" cols="35" />
+            </row>
+            <row>
+                <button id="BtnGrabar" label="Guardar">
+                    <attribute name="onClick">
+                        <![CDATA[
+                            modalwindow.setVisible(false);
+                        ]]>
+                    </attribute>
+                </button>
+            </row>
+        </rows>    
+    </grid>
+  </window>
+
+</zk>
+

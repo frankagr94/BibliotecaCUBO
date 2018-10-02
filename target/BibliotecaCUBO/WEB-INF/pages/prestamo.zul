@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="xhtml" xmlns:w="client">    
+    <absolutelayout>
+        <absolutechildren>
+            <include id="Menubase" src="menubase.zul" />
+            
+            <window title="Prestamos" width="800px" border="normal" position="center" mode="overlapped">    
+      
+<grid>   
+     <rows>
+         
+       <row>  
+            Codigo:
+             <doublebox id="codigo" maxlength="4" cols="4" format="###"/>
+	</row>	
+            
+             <row>
+                 Cota:
+               <combobox id="cod_cotainventario">
+         		<comboitem   label="seleccione"/>
+               </combobox>
+        </row> 
+        <row>
+            Fecha Retiro:
+        <datebox id="fecharetiro"/>
+            
+        </row>
+        <row>
+            Fecha Entrega:
+             <datebox id="fechaentrega"/>
+        </row>
+       
+        
+        <row>
+            Usuario:
+               <combobox id="cod_usuario"> <!--se carga con el codigo y nombre-->
+         		<comboitem   label="seleccione"/> 
+               </combobox>
+        </row>   
+        
+	<row>
+            Estatus Entrega:
+               <combobox id="cod_estatusentrega"> <!--se carga con el codigo y nombre-->
+         		<comboitem   label="seleccione"/> 
+               </combobox>
+        </row> 
+        
+            <row>  
+             <textbox id="estatus" maxlength="4" cols="4" disabled="true"/>
+	</row>   
+                                            	
+	                  
+    </rows>    
+</grid>
+
+<grid>
+    <rows>
+    <row>
+        <button id="BtnGrabar" label="Grabar" />
+    
+    
+        <button id="BtnModificar" label="Modificar" />
+    
+    
+        <button id="BtnEliminar" label="Eliminar" />
+    
+    
+        <button id="BtnLimpiar" label="Limpiar" />
+    </row>
+    </rows>
+</grid>
+
+<attribute name="onClose"><![CDATA[
+		Executions.sendRedirect("/Vistas/index.zul");  
+		
+]]></attribute>    
+   
+     
+<div  apply="org.zkoss.bind.BindComposer" >
+    
+    <grid id="datosPrestamos" mold="paging"  pagingPosition="top"           
+           model="@load(modelo.listaPrestamos)" 
+           width="900px">
+                                    
+        <columns menupopup="auto">
+	   <column label="Codigo"  width="80px" />
+           <column label="Codigo Cota " width="100px"  />           
+           <column label="Fecha Retiro"  width="100px"  />           
+	   <column label="Fecha Entrega" width="100px"  />
+           <column label="Usuario" width="80px"  />
+           <column label="Estatus Entrega" width="110px"  />
+           <column label="Estatus" width="80px"  />                                           
+       </columns>
+        
+       <template name="model">
+           <row>
+               
+               
+	       <label value="@load(each.codigo)" />
+               <label value="@load(each.cod_cota)" />
+               <label value="@load(each.fecharetiro)" />
+	       <label value="@load(each.fechaentrega)" />
+               <label value="@load(each.cod_estatusentrega)" />
+               <label value="@load(each.cod_usuario)" />
+               <label value="@load(each.estatus)" />
+           
+           </row>	
+       </template>
+       
+       
+   </grid>
+          
+</div>
+</window> 
+        </absolutechildren>
+    </absolutelayout>
+  
+
+</zk>
+

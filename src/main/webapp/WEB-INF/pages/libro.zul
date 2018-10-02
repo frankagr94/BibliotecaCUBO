@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="xhtml" xmlns:w="client">    
+    <absolutelayout>
+        <absolutechildren>
+            <include id="Menubase" src="menubase.zul" />
+            
+            <window title="Libros" width="800px" border="normal" position="center" mode="overlapped">    
+      
+<grid>   
+     <rows>
+         
+       <row>  
+            Codigo:
+             <doublebox id="codigo" maxlength="4" cols="4" />
+	</row>	
+        <row>
+           Nombre: 
+           <textbox id="nombre" maxlength="30" cols="35" />
+	</row>
+            
+             <row>  
+            Caracteristicas:
+             <doublebox id="caracteristicas" maxlength="45" cols="30" />
+	</row>
+         <row>
+                Categoria:
+               <combobox id="cod_categoria">
+         		<comboitem   label="Categoria"/>
+               </combobox>
+        </row>
+         <row>  
+            Autor:
+             <textbox id="autor" maxlength="30" cols="9" />
+	</row>
+        
+           <row>  
+            Editorial:
+             <textbox id="editorial" maxlength="30" cols="9"/>
+	</row>
+        
+	
+               <row>
+            
+           <textbox id="estatus"  disabled="true" maxlength="4" cols="4" />
+       
+	</row>             
+    </rows>    
+</grid>
+
+<grid>
+    <rows>
+    <row>
+        <button id="BtnGrabar" label="Grabar" />
+    
+    
+        <button id="BtnModificar" label="Modificar" />
+    
+    
+        <button id="BtnEliminar" label="Eliminar" />
+    
+    
+        <button id="BtnLimpiar" label="Limpiar" />
+    </row>
+    </rows>
+</grid>
+
+<attribute name="onClose"><![CDATA[
+		Executions.sendRedirect("/Vistas/index.zul");  
+		
+]]></attribute>    
+   
+     
+<div  apply="org.zkoss.bind.BindComposer" >
+    
+    <grid id="datosLibros" mold="paging"  pagingPosition="top"           
+           model="@load(modelo.listaLibros)" 
+           width="900px">
+                                    
+        <columns menupopup="auto">
+	   <column label="Codigo"  width="80px" />
+           <column label="Descripcion " width="180px"  />           
+           <column label="Editorial"  width="180px"  />           
+	   <column label="Autor" width="90px"  />
+           <column label="Existencia" width="180px"  />                                           
+       </columns>
+        
+       <template name="model">
+           <row>
+	       <label value="@load(each.codigo)" />
+               <label value="@load(each.descripcion)" />
+               <label value="@load(each.editorial)" />
+	       <label value="@load(each.autor)" />
+               <label value="@load(each.existencia)" />
+           </row>	
+       </template>
+       
+       
+   </grid>
+          
+</div>
+
+</window> 
+            
+        </absolutechildren>
+    </absolutelayout>
+  
+
+</zk>
+

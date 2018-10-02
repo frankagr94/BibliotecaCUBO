@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+               
+<zk xmlns:n="native" xmlns:x="xhtml">
+
+    <div>
+     <menubar id="menubar">
+        	    	<menu label="Maestros" >
+	    			<menupopup>                                        
+                                                                                
+                    <menuitem label="Categorias" href="/categoria"/>
+                    <menuitem label="Empresa" href="/empresa"/>
+                    <menuitem label="Estatus Entrega" href="/estatusentrega"/>
+                    <menuitem label="Libros" href="/libro"/>
+                    <menuitem label="Roles" href="/rol"/> 
+                    <menuitem label="Usuarios" href="/usuarios"/>
+	    			</menupopup>
+	    		</menu>
+
+	    		<menu label="Movimientos" >
+	    			<menupopup>                                        
+                                        
+                                    <menuitem label="Inventario" href="/inventariolibro"/>                                       
+                       <menuitem label="Prestamos" href="/prestamo"/>
+                       <menuitem label="Recibos" href="/recibo"/>
+	    			</menupopup>
+	    		</menu>
+                        
+                        <menu label="salir">
+                            <menupopup>
+                                 <menuitem label="salir"  href="/"/>
+                            </menupopup>
+	    			
+	    		</menu>
+              </menubar>
+    </div>
+</zk>

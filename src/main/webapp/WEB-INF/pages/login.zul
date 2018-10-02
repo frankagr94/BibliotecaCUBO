@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="xhtml" xmlns:w="client">
+
+    
+              
+              
+     <absolutelayout style="background:#dfe8f6 url('${pageContext.request.contextPath}/resources/images/welcomelibrary.jpg') no-repeat center center;">
+       
+      <absolutechildren id="w1" x="500" y="200">
+          
+           <window title="Login" style="background:white"  width="300px"  >
+               <div align="center">
+    <label>Login</label> 
+<h:form id="form" action="login" method="POST">
+    <h:table> 
+      <h:tr> 
+       <h:tb> Cedula </h:tb> 
+       <h:tb> 
+        <h:input id="cedula" name="cedula"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr>
+          <h:br></h:br>
+      </h:tr>
+      <h:tr> 
+       <h:tb> Password </h:tb> 
+       <h:tb> 
+        <h:input id="password" name="password" type="password"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr>
+          <h:br></h:br>
+      </h:tr>
+      <h:tr> 
+       <h:tb> 
+        <h:input type="submit" value="Entrar" align="center"></h:input> 
+       </h:tb> 
+      </h:tr> 
+    </h:table> 
+  </h:form>
+</div>
+         </window>
+         
+       
+      </absolutechildren>
+      
+      
+   </absolutelayout>
+    
+    
+       
+ 
+</zk>

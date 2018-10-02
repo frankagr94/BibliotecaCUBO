@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="xhtml" xmlns:w="client">    
+ <absolutelayout>
+     <absolutechildren>
+          <include id="Menubase" src="menubase.zul" />
+          
+          <window title="Inventario" width="500px" border="normal" position="center" mode="overlapped">    
+      
+<grid>   
+     <rows>
+         
+       <row>  
+            Codigo:
+             <doublebox id="codigo" maxlength="4" cols="4" format="###"/>
+	</row>	
+
+	<row>
+           Codigo Libro: 
+           <combobox id="cod_libro">
+         		<comboitem   label="Libro"/>
+               </combobox>
+       
+	</row>
+               <row>
+            
+           <textbox id="estatus"  disabled="true" maxlength="4" cols="4" />
+       
+	</row>                   
+    </rows>    
+</grid>
+<grid>
+    <rows>
+    <row>
+        <button id="BtnGrabar" label="Grabar" />
+    
+    
+        <button id="BtnModificar" label="Modificar" />
+    
+    
+        <button id="BtnEliminar" label="Eliminar" />
+    
+    
+        <button id="BtnLimpiar" label="Limpiar" />
+    </row>
+    </rows>
+</grid>
+
+<div  apply="org.zkoss.bind.BindComposer" >
+    
+    <grid id="datosInventarioLibro" mold="paging"  pagingPosition="top"           
+           model="@load(modelo.listaInventarioLibro)" 
+           width="900px">
+                                    
+        <columns menupopup="auto">
+	   <column label="Codigo"  width="80px" />
+           <column label="Codigo Libro" width="90px"  />                                          
+       </columns>
+        
+       <template name="model">
+           <row>
+	       <label value="@load(each.codigo)" />
+               <label value="@load(each.codigo_libro)" />
+           </row>	
+       </template>
+       
+       
+   </grid>
+          
+</div>
+</window> 
+     </absolutechildren>
+ </absolutelayout>
+  
+
+</zk>
+

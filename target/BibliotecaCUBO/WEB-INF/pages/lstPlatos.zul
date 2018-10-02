@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./lstPlatos"?>
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">	
+	<zscript>
+		<![CDATA[
+			List platos = new ArrayList();
+			void cargar()
+		  	{
+				platos = servicio.buscarPlatosTodos();
+				binder.loadAll();
+		  	}
+			cargar();
+		]]>
+	</zscript>
+	<panel title="Platos" id="lstPlatos" height="100%" border="normal" closable="true" >
+		<toolbar mold="default" style="background:#005386;">
+			<button label="Nuevo Plato" image="/img/incluir.png"  id="Incluir" >
+				<attribute name="onClick">
+					<![CDATA[
+						Object objeto = new dto.Plato();
+						Map parametros = new HashMap();
+						parametros.put("modo","N");
+						parametros.put("objeto",objeto);
+						Window window = (Window)Executions.createComponents("/WEB-INF/ventanas/editPlato.zul", null,parametros);
+						window.doModal();
+						if (window.getAttribute("accion").equals("A"))
+						{
+							for (dto.PlatoIngrediente pi : objeto.getIngredientes())
+							{
+								pi.setPlato(objeto);
+								pi.setPlatoid(objeto.getCodigo());
+							}
+							servicio.guardarPlato(objeto);
+							cargar();
+						}
+					]]>
+				</attribute>
+			</button>
+			<button label="Borrar Todos" image="/img/trash_can2_delete.png" id="EliminarTodo" >
+				<attribute name="onClick">
+					<![CDATA[
+						if (Messagebox.show("Seguro de Eliminar Todos Los Elementos Seleccionados?", "Eliminar Todos", Messagebox.OK + Messagebox.CANCEL, Messagebox.INFORMATION) == Messagebox.OK)
+					    {
+					    	for (Listitem li : box.getSelectedItems())
+					    	{
+					    		dto.Plato platEnt = li.getValue();
+					    		try
+					    		{
+					    			servicio.borrarPlato(platEnt);
+					    		}
+					    		catch(Exception e)
+					    		{
+					    			alert(e.getMessage());
+					    		}
+					    	}
+					    	cargar();
+					    }	
+					]]>
+				</attribute>
+			</button>
+		</toolbar>
+		<panelchildren style="padding : 5px;">
+			<panel title="" height="450px">
+				<panelchildren >
+					<borderlayout>
+						<center autoscroll="true">
+							<listbox id="box"
+								model="@{platos}" 
+								mold="paging" pageSize="50" multiple="true"
+								checkmark="true" emptyMessage="No Hay Platos Incluidos">
+    							<listhead>
+    								<listheader label="" align="center" valign="middle" width="5%" />
+    								<listheader label="Codigo" align="center" valign="middle" width="10%" />
+									<listheader label="Nombre" align="center" valign="middle" width="80%" />
+									<listheader label="Ops." align="center" valign="middle" width="5%" />
+    							</listhead>
+    							<listitem sclass="row-border item" self="@{each=objeto}" value="@{objeto}">
+    								<listcell/>
+									<listcell label="@{objeto.codigo}"/>
+  									<listcell label="@{objeto.nombre}"/>
+  									<listcell>
+  										<image tooltiptext="Editar Plato" src="/img/editar.png" id="Editar" width="18px" height="18px">
+											<attribute name="onClick">
+												<![CDATA[
+													Object objeto = ((Listitem)self.getParent().getParent()).getValue();										
+													Map parametros = new HashMap();
+													parametros.put("modo","E");
+													parametros.put("objeto",objeto);
+													Window window = (Window)Executions.createComponents("/WEB-INF/ventanas/editPlato.zul", null,parametros);
+													window.doModal();
+													if (window.getAttribute("accion").equals("A"))
+													{
+														binder.loadAll();
+													}	
+												]]>
+											</attribute>
+										</image>
+										<image tooltiptext="Borrar Plato" src="/img/borrar.png" id="Eliminar" width="18px" height="18px">
+											<attribute name="onClick">
+												<![CDATA[
+													try
+												    {
+														Object objeto = ((Listitem)self.getParent().getParent()).getValue();
+														servicio.borrarPlato(objeto);
+														cargar();
+												    }
+												    catch (Exception sle)
+												    {
+												    	alert(sle.getMessage());
+												    }	
+												]]>
+											</attribute>
+										</image>
+  									</listcell>
+    							</listitem>
+							</listbox> 				
+						</center>
+					</borderlayout>
+				</panelchildren>
+			</panel>
+		</panelchildren>
+	</panel>
+</zk>

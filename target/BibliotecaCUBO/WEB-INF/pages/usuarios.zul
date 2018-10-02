@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="xhtml" xmlns:w="client">    
+    <absolutelayout>
+        <absolutechildren>
+            <include id="Menubase" src="menubase.zul" />
+            
+            <window title="Usuarios" width="800px" border="normal" position="center" mode="overlapped">    
+      
+<grid>   
+     <rows>
+      
+            
+             <row>  
+            Cedula:
+             <doublebox id="cedula" maxlength="8" cols="9" format="###"/>
+             
+              Password:
+             <textbox id="password" maxlength="8" type="password" 
+                         cols="9" />
+             
+             
+	</row>
+           
+        
+	<row>
+           Nombre: 
+           <textbox id="nombre" maxlength="30" cols="35" />
+           
+            Apellido: 
+           <textbox id="apellido" maxlength="30" cols="31" />
+           
+	</row>
+             
+        <row>
+          Direccion: 
+          <textbox id="direccion" maxlength="30" cols="35" />
+         
+           Telefono: 
+           <textbox id="telefono" maxlength="30" cols="35" />
+            
+	</row>
+        
+        
+         <row>
+              Rol:
+               <combobox id="cod_rol">
+         		<comboitem   label="seleccione"/>
+               </combobox>
+           Correo: 
+           <textbox id="correo" maxlength="30" cols="35"  constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address"/>
+	
+           <textbox id="estatus"  disabled="true" maxlength="4" cols="4"/>
+       
+	</row>                  
+    </rows>    
+</grid>
+
+<grid>
+     <rows>
+    <row>
+        <button id="BtnGrabar" label="Grabar" />
+    
+    
+        <button id="BtnModificar" label="Modificar" />
+    
+    
+        <button id="BtnEliminar" label="Eliminar" />
+    
+    
+        <button id="BtnLimpiar" label="Limpiar" />
+    </row>
+    </rows>
+</grid>
+
+</window> 
+        </absolutechildren>
+    </absolutelayout>
+  
+
+</zk>
+

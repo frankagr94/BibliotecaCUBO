@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="xhtml" xmlns:w="client">    
+<!--ZONA DEL MENU PRINCIPAL--> 
+  <include id="Menubase" src="menubase.zul" />
+<!--///////////////////////////////////////////////////////-->
+<window title="Administrar Empresa" width="700px"  border="normal" position="center" mode="overlapped">
+<!--ZONA DEL FORMULARIO AGREGAR/EDITAR-->
+    <div align="center">
+    <label>Agregar/Editar</label> 
+<h:form id="form" action="saveEmpresa" method="POST" modelAttribute="empresa">
+    <h:table> 
+        <h:input type="hidden" value="${empresa.codigo_empresa}" id="codigo_empresa" name="codigo_empresa"/>
+      <h:tr> 
+       <h:tb> Nombre </h:tb> 
+       <h:tb> 
+        <h:input value="${empresa.nombre}" id="nombre" name="nombre"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr> 
+       <h:tb> Rif </h:tb> 
+       <h:tb> 
+        <h:input value="${empresa.rif}" id="rif" name="rif"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr> 
+       <h:tb> Telefono </h:tb> 
+       <h:tb> 
+        <h:input value="${empresa.telefono}" id="telefono" name="telefono"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr> 
+       <h:tb> 
+        <h:input type="submit" value="Guardar" align="center"></h:input> 
+       </h:tb> 
+      </h:tr> 
+    </h:table> 
+  </h:form>
+</div>
+<!--///////////////////////////////////////////////////////-->
+      <div> <!--ZONA DE LA GRID QUE MUESTRA LOS ROLES EN BASE DE DATOS-->
+        <listbox id="listEmpresa">
+                    <listhead>
+                        <listheader label="Nombre"/>
+                        <listheader label="Rif"/>
+                        <listheader label="Telefono"/>
+                        <listheader label="Estatus"/>
+                        <listheader label="Accion"/>
+                    </listhead>
+                    <listitem forEach="${listEmpresa}">
+                            <listcell>
+                                <label value="${each.nombre}"/>
+                            </listcell>
+                            <listcell>
+                                <label value="${each.rif}"/>
+                            </listcell>
+                            <listcell>
+                                <label value="${each.telefono}"/>
+                            </listcell>
+                            <listcell>
+                                <label if="${each.estatus==1}" value="Activa"/>
+                                <label if="${each.estatus==0}" value="Inactiva"/>
+                            </listcell>
+                            <listcell>
+                                <a href="/editEmpresa?id=${each.codigo_empresa}">Editar</a>
+                                <a/>
+                                <a href="/deleteEmpresa?id=${each.codigo_empresa}">Eliminar</a>
+                                <a/>
+                                <a href="/changeStatusEmpresa?id=${each.codigo_empresa}">Activar/Desactivar</a>
+                            </listcell>
+                    </listitem>
+        </listbox>
+    </div>
+<!--///////////////////////////////////////////////////////-->  
+  </window>
+
+</zk>

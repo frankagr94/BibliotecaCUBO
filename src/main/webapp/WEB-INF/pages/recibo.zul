@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="xhtml" xmlns:w="client">    
+    <absolutelayout>
+        <absolutechildren>
+             <include id="Menubase" src="menubase.zul" />
+             
+             
+             <window title="Recibos" width="500px" border="normal" position="center" mode="overlapped">    
+      
+<grid>   
+     <rows>
+         
+       <row>  
+            Codigo:
+             <doublebox id="codigo" maxlength="4" cols="4" />
+	</row>	
+
+	<row>
+           Codigo Prestamo: 
+           <combobox id="cod_prestamo">
+         		<comboitem   label="seleccione"/>
+               </combobox>
+       
+	</row>
+                 <row>
+           Codigo Empresa: <!--autocargado desde la tabla -->
+           <textbox id="cod_empresa" maxlength="4" cols="4" />
+       
+	</row>
+         <row>
+            
+           <textbox id="estatus"  disabled="true" maxlength="4" cols="4" />
+       
+	</row> 
+                                      
+    </rows>    
+</grid>
+<grid>
+     <rows>
+    <row>
+        <button id="BtnGrabar" label="Grabar" />
+    
+    
+        <button id="BtnModificar" label="Modificar" />
+    
+    
+        <button id="BtnEliminar" label="Eliminar" />
+    
+    
+        <button id="BtnLimpiar" label="Limpiar" />
+    </row>
+    </rows>
+</grid>
+
+<attribute name="onClose"><![CDATA[
+		Executions.sendRedirect("/Vistas/index.zul");  
+		
+]]></attribute>  
+
+     
+     
+     <div  apply="org.zkoss.bind.BindComposer" >
+    
+    <grid id="datosRecibo" mold="paging"  pagingPosition="top"           
+           model="@load(modelo.listaRecibo)" 
+           width="900px">
+                                    
+        <columns menupopup="auto">
+	   <column label="Codigo"  width="80px" />
+           <column label="Codigo Empresa" width="110px"  />
+           <column label="Codigo Prestamo" width="110px"  />                                          
+           <column label="Estatus" width="80px"  />
+        
+        </columns>
+        
+       <template name="model">
+           <row>
+	       <label value="@load(each.codigo)" />
+               <label value="@load(each.cod_empresa)" />
+	       <label value="@load(each.cod_prestamo)" />
+               <label value="@load(each.estatus)" />
+               
+           </row>	
+       </template>
+       
+       
+   </grid>
+          
+</div>
+</window>
+        </absolutechildren>
+    </absolutelayout>
+   
+
+</zk>
+

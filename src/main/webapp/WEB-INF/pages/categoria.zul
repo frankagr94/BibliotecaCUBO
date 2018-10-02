@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="xhtml" xmlns:w="client">    
+<!--ZONA DEL MENU PRINCIPAL--> 
+    <include id="Menubase" src="menubase.zul" />
+<!--///////////////////////////////////////////////////////-->
+<window title="Administrar Categorias" width="900px"  border="normal" position="center" mode="overlapped">
+<!--ZONA DEL FORMULARIO AGREGAR/EDITAR-->
+    <div align="center">
+    <label>Agregar/Editar</label> 
+<h:form id="form" action="saveCategoria" method="POST" modelAttribute="categoria">
+    <h:table> 
+        <h:input type="hidden" value="${categoria.codigo_categoria}" id="codigo_categoria" name="codigo_categoria"/>
+      <h:tr> 
+       <h:tb> Nombre </h:tb> 
+       <h:tb> 
+        <h:input value="${categoria.nombre}" id="nombre" name="nombre"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr> 
+       <h:tb> Descripcion </h:tb> 
+       <h:tb> 
+        <h:textarea value="${categoria.descripcion}" id="descripcion" name="descripcion"/> 
+       </h:tb>
+      </h:tr>
+      <h:tr> 
+       <h:tb> 
+        <h:input type="submit" value="Guardar" align="center"></h:input> 
+       </h:tb> 
+      </h:tr> 
+    </h:table> 
+  </h:form>
+</div>
+<!--///////////////////////////////////////////////////////-->
+      <div> <!--ZONA DE LA GRID QUE MUESTRA LOS ROLES EN BASE DE DATOS-->
+        <listbox id="listCategoria">
+                    <listhead>
+                        <listheader label="Nombre"/>
+                        <listheader label="Descripcion"/>
+                        <listheader label="Estatus"/>
+                        <listheader label="Accion"/>
+                    </listhead>
+                    <listitem forEach="${listCategoria}">
+                            <listcell>
+                                <label value="${each.nombre}"/>
+                            </listcell>
+                            <listcell>
+                                <label value="${each.descripcion}"/>
+                            </listcell>
+                            <listcell>
+                                <label if="${each.estatus==1}" value="Activa"/>
+                                <label if="${each.estatus==0}" value="Inactiva"/>
+                            </listcell>
+                            <listcell>
+                                <a href="/editCategoria?id=${each.codigo_categoria}">Editar</a>
+                                <a href="/deleteCategoria?id=${each.codigo_categoria}">Eliminar</a>
+                                <a href="/changeStatusCategoria?id=${each.codigo_categoria}">Activar/Desactivar</a>
+                            </listcell>
+                    </listitem>
+        </listbox>
+    </div>
+<!--///////////////////////////////////////////////////////-->  
+  </window>
+
+</zk>
+
